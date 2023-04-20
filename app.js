@@ -48,7 +48,7 @@ function selectDeck(deck) {
 function displayCard() {
   const cardData = currentDeck.cards[currentIndex];
 
-  cardId.textContent = `${currentIndex + 1} / ${currentDeck.cards.length}`;
+  cardId.textContent = `${currentIndex + 1}`;
 
   if (currentDeck.amount === 1) {
     card1.textContent = cardData;
@@ -101,8 +101,7 @@ function updateTimerDisplay(timeLeft) {
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random
-() * (i + 1));
+    const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
@@ -111,6 +110,7 @@ function shuffle(array) {
 function nextCard() {
   currentIndex++;
   if (currentIndex >= currentDeck.cards.length) {
+    currentDeck.cards =
     currentDeck.cards = shuffle([...currentDeck.cards]);
     currentIndex = 0;
   }
