@@ -1,172 +1,168 @@
-const menu = document.getElementById('menu');
-const deckView = document.getElementById('deck-view');
-const scoreDiv = document.getElementById('score');
-const cardIdDiv = document.getElementById('card-id');
-const timerDiv = document.getElementById('timer');
-const cardArea = document.getElementById('card-area');
-const menuButton = document.getElementById('menu-button');
-const bottomMiddle = document.getElementById('bottom-middle');
-const bottomRight = document.getElementById('bottom-right');
+const mainMenu = document.getElementById("main-menu");
+const cardView = document.getElementById("card-view");
+const topRow = document.getElementById("top-row");
+const scoreElement = document.getElementById("score");
+const cardId = document.getElementById("card-id");
+const timerElement = document.getElementById("timer");
+const cardArea = document.getElementById("card-area");
+const card1 = document.getElementById("card1");
+const card2 = document.getElementById("card2");
+const bottomRow = document.getElementById("bottom-row");
+const menuButton = document.getElementById("menu-button");
+const bottomMiddle = document.getElementById("bottom-middle");
+const bottomRight = document.getElementById("bottom-right");
 
+let decks;
 let currentDeck;
 let currentIndex = 0;
 let timerInterval;
+let score = 0;
 
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+async function loadDecks() {
+  try {
+    const response = await fetch("decks.json");
+    decks = await response.json();
 
-function formatTime(seconds) {
-  const minutes = Math.floor(seconds / 60);
-  seconds %= 60;
-  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-}
-
-function startTimer(duration) {
-  let remaining = duration;
-  timerDiv.textContent = formatTime(remaining);
-
-  timerInterval = setInterval(() => {
-    remaining -= 1;
-    timerDiv.textContent = formatTime(remaining);
-
-    if (remaining <= 0) {
-      clearInterval(timerInterval);
-      // Add audio and visual effects here
+    for (const deck of decks) {
+      const card = document.createElement("div");
+      card.textContent = deck.title;
+      card.style.backgroundColor = deck.cardColor;
+      card.style.color = deck.textColor;
+      card.classList.add("deck-card");
+      card.addEventListener("click", () => selectDeck(deck));
+      mainMenu.appendChild(card);
     }
-  }, 1000);
+  } catch (error) {
+    console.error("Error loading decks:", error);
+  }
 }
 
-function loadDeck(deck) {
-  currentDeck = { ...deck, cards: [...deck.cards] };
-  shuffleArray(currentDeck.cards);
+function selectDeck(deck) {
+  mainMenu.classList.add("hidden");
+  cardView.classList.remove("hidden");
+  currentDeck = { ...deck, cards: shuffle([...deck.cards]) };
   currentIndex = 0;
-
-  if (currentDeck.attrib.includes('score')) {
-    scoreDiv.textContent = '0';
-    bottomMiddle.textContent = '+1';
-    bottomRight.textContent = '-1';
-    bottomMiddle.onclick = () => {
-      const currentScore = parseInt(scoreDiv.textContent, 10);
-      scoreDiv.textContent = (currentScore + 1).toString();
-    };
-    bottomRight.onclick = () => {
-      const currentScore = parseInt(scoreDiv.textContent, 10);
-      scoreDiv.textContent = Math.max(currentScore - 1, 0).toString();
-    };
-  }
-
-  if (currentDeck.attrib.includes('timer')) {
-    const timerDuration = parseInt(currentDeck.timer, 10);
-    bottomMiddle.textContent = 'Start';
-    bottomRight.textContent = 'Reset';
-    bottomMiddle.onclick = () => {
-      clearInterval(timerInterval);
-      startTimer(timerDuration);
-    };
-    bottomRight.onclick = () => {
-      clearInterval(timerInterval);
-      timerDiv.textContent = formatTime(timerDuration);
-    };
-  }
-
   displayCard();
 }
 
 function displayCard() {
-  const card = currentDeck.cards[currentIndex];
-  cardArea.innerHTML = '';
-  cardArea.style.backgroundColor = currentDeck.card_color;
-  cardArea.style.color = currentDeck.text_color;
-  
-  card.forEach((line) => {
-    const lineElement = document.createElement('p');
-    lineElement.textContent = line;
-    cardArea.appendChild(lineElement);
-  });
+  const cardData = currentDeck.cards[currentIndex];
+
+  cardId.textContent = `${currentIndex + 1} / ${currentDeck.cards.length}`;
 
   if (currentDeck.amount === 1) {
-    cardIdDiv.textContent = `Card ${currentIndex + 1}`;
+    card1.textContent = cardData;
+    card1.classList.remove("hidden");
+    card2.classList.add("hidden");
   } else {
-    cardIdDiv.textContent = `Cards ${currentIndex + 1}-${currentIndex + 2}`;
+    card1.textContent = cardData[0];
+    card2.textContent = cardData[1];
+    card1.classList.remove("hidden");
+    card2.classList.remove("hidden");
   }
+
+  if (currentDeck.attrib.includes("timer")) {
+    timerElement.classList.remove("hidden");
+    startTimer(currentDeck.timer);
+  } else {
+    timerElement.classList.add("hidden");
+  }
+
+  if (currentDeck.attrib.includes("score")) {
+    scoreElement.classList.remove("hidden");
+    scoreElement.textContent = `Score: ${score}`;
+  } else {
+    scoreElement.classList.add("hidden");
+  }
+}
+
+function startTimer(duration) {
+  clearInterval(timerInterval);
+  let timeLeft = duration;
+  updateTimerDisplay(timeLeft);
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+
+    if (timeLeft < 0) {
+      clearInterval(timerInterval);
+      // Add timer end behavior (e.g. sound, vibration) here.
+    } else {
+      updateTimerDisplay(timeLeft);
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay(timeLeft) {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random
+() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 function nextCard() {
-  currentIndex = (currentIndex + currentDeck.amount) % currentDeck.cards.length;
+  currentIndex++;
+  if (currentIndex >= currentDeck.cards.length) {
+    currentDeck.cards = shuffle([...currentDeck.cards]);
+    currentIndex = 0;
+  }
   displayCard();
 }
 
-function prevCard() {
-  currentIndex -= currentDeck.amount;
+function previousCard() {
+  currentIndex--;
   if (currentIndex < 0) {
-    currentIndex += currentDeck.cards.length
+    currentIndex = currentDeck.cards.length - 1;
   }
   displayCard();
 }
 
-menuButton.onclick = () => {
-  if (confirm('Are you sure you want to exit?')) {
-    deckView.style.display = 'none';
-    menu.style.display = 'flex';
-    clearInterval(timerInterval);
+function updateScore(amount) {
+  score += amount;
+  if (score < 0) {
+    score = 0;
   }
-};
+  scoreElement.textContent = `Score: ${score}`;
+}
 
-cardArea.onclick = (event) => {
-  if (event.clientX > window.innerWidth / 2) {
-    nextCard();
+cardArea.addEventListener("click", (event) => {
+  if (event.clientX < cardArea.clientWidth / 2) {
+    previousCard();
   } else {
-    prevCard();
+    nextCard();
   }
-};
+});
 
-// Swipe event handling
-cardArea.addEventListener('touchstart', handleTouchStart, false);
-cardArea.addEventListener('touchmove', handleTouchMove, false);
-
-let xDown = null;
-
-function handleTouchStart(event) {
-  xDown = event.touches[0].clientX;
-}
-
-function handleTouchMove(event) {
-  if (!xDown) {
-    return;
+menuButton.addEventListener("click", () => {
+  if (confirm("Are you sure you want to exit?")) {
+    cardView.classList.add("hidden");
+    mainMenu.classList.remove("hidden");
   }
+});
 
-  const xUp = event.touches[0].clientX;
-  const xDiff = xDown - xUp;
-
-  if (Math.abs(xDiff) > 50) {
-    if (xDiff > 0) {
-      nextCard();
-    } else {
-      prevCard();
-    }
-    xDown = null;
+bottomMiddle.addEventListener("click", () => {
+  if (currentDeck.attrib.includes("timer")) {
+    startTimer(currentDeck.timer);
+  } else if (currentDeck.attrib.includes("score")) {
+    updateScore(1);
   }
-}
+});
 
-// Fetch decks and create menu items
-fetch('decks.json')
-  .then((response) => response.json())
-  .then((decks) => {
-    decks.forEach((deck) => {
-      const menuItem = document.createElement('div');
-      menuItem.className = 'menu-item';
-      menuItem.style.backgroundColor = deck.card_color;
-      menuItem.style.color = deck.text_color;
-      menuItem.textContent = deck.title;
-      menuItem.onclick = () => {
-        menu.style.display = 'none';
-        deckView.style.display = 'flex';
-        loadDeck(deck);
-      };
-      menu.appendChild(menuItem);
-    });
-  });
+bottomRight.addEventListener("click", () => {
+  if (currentDeck.attrib.includes("timer")) {
+    clearInterval(timerInterval);
+    timerElement.textContent = "0:00";
+  } else if (currentDeck.attrib.includes("score")) {
+    updateScore(-1);
+  }
+});
+
+loadDecks();
