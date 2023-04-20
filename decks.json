@@ -1,0 +1,29 @@
+{
+  "title": "Short Words",
+  "card_color": "#F0F0F0",
+  "text_color": "#333333",
+  "attrib": "score",
+  "amount": 1,
+  "cards": [
+    {"id": 1, "content": "Apple"},
+    {"id": 2, "content": "Banana"},
+    {"id": 3, "content": "Cherry"},
+    {"id": 4, "content": "Dog"},
+    {"id": 5, "content": "Elephant"},
+    {"id": 6, "content": "Frog"},
+    {"id": 7, "content": "Giraffe"},
+    {"id": 8, "content": "House"},
+    {"id": 9, "content": "Island"},
+    {"id": 10, "content": "Jungle"},
+    {"id": 11, "content": "Kite"},
+    {"id": 12, "content": "Lemon"},
+    {"id": 13, "content": "Moon"},
+    {"id": 14, "content": "Night"},
+    {"id": 15, "content": "Orange"},
+    {"id": 16, "content": "Penguin"},
+    {"id": 17, "content": "Queen"},
+    {"id": 18, "content": "Rain"},
+    {"id": 19, "content": "Sun"},
+    {"id": 20, "content": "Tiger"}
+  ]
+}
