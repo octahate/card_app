@@ -3,36 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
   <title>Card App</title>
 </head>
 <body>
-  <div id="main-menu"></div>
-  <div id="card-view" class="hidden">
-    <div id="top-row">
-      <span id="score" class="hidden"></span>
-      <span id="card-id"></span>
-      <span id="timer" class="hidden"></span>
+  <div id="app">
+    <div id="menu" class="menu">
+      <!-- Decks will be dynamically generated here -->
     </div>
-    <div id="card-area">
-      <div id="card1" class="card"></div>
-      <div id="card2" class="card hidden"></div>
-    </div>
-    <div id="bottom-row">
-      <button id="menu-button">Menu</button>
-<div id="bottom-middle" class="bottom-middle">
-  <div id="timer-buttons" class="hidden">
-    <button id="start-timer">Start</button>
-    <button id="pause-timer">Pause</button>
-    <button id="reset-timer">Reset</button>
-  </div>
-  <div id="score-buttons" class="hidden">
-    <button id="plus">+</button>
-    <button id="minus">-</button>
-    <button id="reset-score">Reset</button>
-  </div>
-</div>
-      <button id="bottom-right" class="hidden"></button>
+    <div id="deck-view" class="hidden">
+      <div id="top-row">
+        <div id="score" class="hidden"></div>
+        <div id="card-id"></div>
+        <div id="timer" class="hidden"></div>
+      </div>
+      <div id="card-area">
+        <div id="card1" class="card hidden"></div>
+        <div id="card2" class="card hidden"></div>
+      </div>
+      <div id="bottom-row">
+        <div id="menu-button">Menu</div>
+        <div id="bottom-middle" class="bottom-middle">
+          <div id="timer-buttons" class="hidden">
+            <button id="start-timer">Start</button>
+            <button id="pause-timer">Pause</button>
+            <button id="reset-timer">Reset</button>
+          </div>
+          <div id="score-buttons" class="hidden">
+            <button id="plus">+</button>
+            <button id="minus">-</button>
+            <button id="reset-score">Reset</button>
+          </div>
+        </div>
+        <div id="bottom-right"></div>
+      </div>
     </div>
   </div>
   <script src="app.js"></script>
