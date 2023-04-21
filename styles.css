@@ -34,13 +34,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: calc(100% / 5 - 20px);
+  width: calc(100% - 40px); /* Subtracting padding from the width */
+  height: calc(20% - 40px); /* Subtracting padding from the height */
   margin-bottom: 20px;
+  padding: 20px; /* Adding padding around the menu item */
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: all 0.3s ease;
+  font-size: 1.5rem; /* Adjust font size if needed */
 }
 
 .menu-item:hover {
