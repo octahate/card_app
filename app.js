@@ -28,7 +28,7 @@ async function loadDecks() {
       card.textContent = deck.title;
       card.style.backgroundColor = deck.cardColor;
       card.style.color = deck.textColor;
-      card.classList.add("deck-card");
+      card.classList.add("menu-item");
       card.addEventListener("click", () => selectDeck(deck));
       mainMenu.appendChild(card);
     }
