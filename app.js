@@ -26,8 +26,8 @@ async function loadDecks() {
     for (const deck of decks) {
       const card = document.createElement("div");
       card.textContent = deck.title;
-      card.style.backgroundColor = deck.cardColor;
-      card.style.color = deck.textColor;
+      card.style.backgroundColor = deck.card_color;
+      card.style.color = deck.text_color;
       card.classList.add("menu-item");
       card.addEventListener("click", () => selectDeck(deck));
       mainMenu.appendChild(card);
@@ -47,8 +47,11 @@ function selectDeck(deck) {
 
 function displayCard() {
   const cardData = currentDeck.cards[currentIndex];
-
+  
   cardId.textContent = `${currentIndex + 1} / ${currentDeck.cards.length}`;
+  
+  card1.style.backgroundColor = currentDeck.card_color;
+  card1.style.color = currentDeck.text_color;
 
   card1.innerHTML = ''; // Clear the content of card1
   card2.classList.add("hidden");
