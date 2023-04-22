@@ -4,8 +4,13 @@
   padding: 0;
 }
 
-body {
-  font-family: Arial, sans-serif;
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
 }
 
 .hidden {
@@ -27,17 +32,16 @@ body {
   overflow-y: auto;
   height: 100%;
   width: 100%;
-  padding: 20px;
+  padding: 30px;
 }
 
 .menu-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(100% - 40px); /* Subtracting padding from the width */
   height: calc(20% - 40px); /* Subtracting padding from the height */
-  margin-bottom: 20px;
-  padding: 20px; /* Adding padding around the menu item */
+  margin-bottom: 30px;
+  padding: 30px; /* Adding padding around the menu item */
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -82,6 +86,13 @@ body {
   padding: 0 20px;
 }
 
+#card-view {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+}
+
 #card-area {
   display: flex;
   flex-direction: column;
@@ -90,6 +101,8 @@ body {
   flex-grow: 1;
   padding: 20px;
   overflow-y: auto;
+  width: 100%;
+  height: 80%;
 }
 
 .card {
@@ -101,7 +114,16 @@ body {
   text-align: center;
   font-size: 1.5rem;
   transition: all 0.3s ease;
+  width: 95%;
+  height: 80%;
+  overflow-wrap: break-word; /* To break long words that might overflow */
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
 
 #menu-button {
   cursor: pointer;

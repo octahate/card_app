@@ -48,17 +48,22 @@ function selectDeck(deck) {
 function displayCard() {
   const cardData = currentDeck.cards[currentIndex];
 
-  cardId.textContent = `${currentIndex + 1}`;
+  cardId.textContent = `${currentIndex + 1} / ${currentDeck.cards.length}`;
 
-  if (currentDeck.amount === 1) {
-    card1.textContent = cardData;
-    card1.classList.remove("hidden");
-    card2.classList.add("hidden");
-  } else {
+  card1.innerHTML = ''; // Clear the content of card1
+  card2.classList.add("hidden");
+
+  if (Array.isArray(cardData) && cardData.length === 1) {
     card1.textContent = cardData[0];
-    card2.textContent = cardData[1];
     card1.classList.remove("hidden");
-    card2.classList.remove("hidden");
+  } else {
+    // Iterate through the cardData array and create a new paragraph for each item
+    cardData.forEach(item => {
+      const paragraph = document.createElement('p');
+      paragraph.textContent = item;
+      card1.appendChild(paragraph);
+    });
+    card1.classList.remove("hidden");
   }
 
   if (currentDeck.attrib.includes("timer")) {
@@ -75,6 +80,7 @@ function displayCard() {
     scoreElement.classList.add("hidden");
   }
 }
+
 
 function startTimer(duration) {
   clearInterval(timerInterval);

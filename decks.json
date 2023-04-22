@@ -7,7 +7,7 @@
     "timer": "60",
     "amount": 1,
     "cards": [
-      ["apple", "guyana"],
+      ["apple", "guyana", "toti"],
       ["banana"],
       ["grape"],
       ["orange"],
