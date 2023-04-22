@@ -57,5 +57,64 @@
       ["Two driven jocks help fax my big quiz."],
       ["Five quacking zephyrs jolt my wax bed."]
     ]
+  },
+  {
+    "title": "Short Words",
+    "card_color": "#ffc107",
+    "text_color": "#000000",
+    "attrib": "timer",
+    "timer": "60",
+    "amount": 1,
+    "cards": [
+      ["apple", "guyana", "toti"],
+      ["banana"],
+      ["grape"],
+      ["orange"],
+      ["kiwi"],
+      ["lemon"],
+      ["lime"],
+      ["peach"],
+      ["pear"],
+      ["plum"],
+      ["cherry"],
+      ["fig"],
+      ["guava"],
+      ["mango"],
+      ["papaya"],
+      ["berry"],
+      ["date"],
+      ["grapefruit"],
+      ["nectarine"],
+      ["pineapple"]
+    ]
+  },
+  {
+    "title": "Long Sentences",
+    "card_color": "#28a745",
+    "text_color": "#ffffff",
+    "attrib": "score",
+    "amount": 1,
+    "cards": [
+      ["The quick brown fox jumps over the lazy dog."],
+      ["Pack my box with five dozen liquor jugs."],
+      ["How vexingly quick daft zebras jump!"],
+      ["The five boxing wizards jump quickly."],
+      ["Jackdaws love my big sphinx of quartz."],
+      ["Sympathizing would fix Quaker objectives."],
+      ["A wizard's job is to vex chumps quickly in fog."],
+      ["Watch Jeopardy! Alex Trebek's fun TV quiz game."],
+      ["By Jove, my quick study of lexicography won a prize."],
+      ["Waxy and quivering, jocks fumble the pizza."],
+      ["The job requires extra pluck and zeal from every young wage earner."],
+      ["A mad boxer shot a quick, gloved jab to the jaw of his dizzy opponent."],
+      ["We promptly judged antique ivory buckles for the next prize."],
+      ["Sixty zippers were quickly picked from the woven jute bag."],
+      ["Crazy Fredericka bought many very exquisite opal jewels."],
+      ["Jump by vow of quick, lazy strength in the hemp field."],
+      ["Quick zephyrs blow, vexing daft Jim."],
+      ["A quivering Texas zombie fought republic linked jewelry."],
+      ["Two driven jocks help fax my big quiz."],
+      ["Five quacking zephyrs jolt my wax bed."]
+    ]
   }
 ]
