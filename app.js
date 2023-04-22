@@ -81,7 +81,6 @@ function displayCard() {
   }
 }
 
-
 function startTimer(duration) {
   clearInterval(timerInterval);
   let timeLeft = duration;
@@ -139,6 +138,14 @@ function updateScore(amount) {
   scoreElement.textContent = `Score: ${score}`;
 }
 
+function handleArrowKeys(event) {
+  if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+    nextCard();
+  } else if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+    previousCard();
+  }
+}
+
 cardArea.addEventListener("click", (event) => {
   if (event.clientX < cardArea.clientWidth / 2) {
     previousCard();
@@ -170,5 +177,9 @@ bottomRight.addEventListener("click", () => {
     updateScore(-1);
   }
 });
+
+
+document.addEventListener("keydown", handleArrowKeys);
+
 
 loadDecks();

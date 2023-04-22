@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+.hidden {
+  display: none;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -13,9 +17,7 @@ html, body {
   background-color: var(--bg-color);
 }
 
-.hidden {
-  display: none;
-}
+
 
 #app {
   display: flex;
@@ -86,9 +88,8 @@ html, body {
   padding: 0 20px;
 }
 
+
 #card-view {
-  display: flex;
-  flex-direction: column;
   flex-grow: 1;
   height: 100%;
 }
