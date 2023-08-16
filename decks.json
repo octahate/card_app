@@ -3,8 +3,6 @@
     "title": "Top 10",
     "card_color": "#ffc107",
     "text_color": "#000000",
-    "attrib": "timer",
-    "timer": "60",
     "amount": 1,
     "cards": [
       ["film series", "nest", "spice", "elephant", "carnival"],
@@ -95,7 +93,6 @@
     "title": "Long Sentences",
     "card_color": "#28a745",
     "text_color": "#ffffff",
-    "attrib": "score",
     "amount": 1,
     "cards": [
       ["The quick brown fox jumps over the lazy dog."],
@@ -154,7 +151,6 @@
     "title": "Long Sentences",
     "card_color": "#28a745",
     "text_color": "#ffffff",
-    "attrib": "score",
     "amount": 1,
     "cards": [
       ["The quick brown fox jumps over the lazy dog."],
